@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16.1
+    container_name: "postgres_db"
+    volumes:
+      - ./pgdata/:/var/lib/postgresql/data
+      - .:/docker-entrypoint-initdb.d
+    ports:
+      - "15432:5432"
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
+
+volumes:
+  pgdata:
