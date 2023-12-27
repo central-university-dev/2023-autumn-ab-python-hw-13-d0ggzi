@@ -18,17 +18,17 @@ def test_bad_reg():
     assert resp.body == bytes("Username or password is required", encoding="raw_unicode_escape")
 
 
-def test_user_exists():
-    resp: types.Response = auth.register_user("maks", "123")
-
-    assert resp.status_code == 400
-    assert resp.body == bytes("User with specified login already exists", encoding="raw_unicode_escape")
-
-
 def test_user_reg(client):
     resp: types.Response = auth.register_user(client, "1234")
 
     assert resp.status_code == 200
+
+
+def test_user_exists(client):
+    resp: types.Response = auth.register_user(client, "1234")
+
+    assert resp.status_code == 400
+    assert resp.body == bytes("User with specified login already exists", encoding="raw_unicode_escape")
 
 
 def test_bad_login():
