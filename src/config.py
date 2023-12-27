@@ -12,13 +12,12 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
 
-    PGADMIN_DEFAULT_EMAIL: str
-    PGADMIN_DEFAULT_PASSWORD: str
-
     @property
     def DATABASE_URL_psycopg(self):
-        return (f"postgresql+psycopg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
-                f"{self.POSTGRES_OUT_HOST}:{self.POSTGRES_OUT_PORT}/{self.POSTGRES_DB}")
+        return (
+            f"postgresql+psycopg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
+            f"{self.POSTGRES_OUT_HOST}:{self.POSTGRES_OUT_PORT}/{self.POSTGRES_DB}"
+        )
 
 
 settings = Settings()

@@ -1,7 +1,7 @@
 from .types import Response
-from db import db
+from src.db import db
 import jwt
-from config import settings
+from src.config import settings
 
 
 def register_user(username, password):
@@ -10,7 +10,7 @@ def register_user(username, password):
     res = db.reg_user(username, password)
     if res is False:
         return Response(400, "User with specified login already exists")
-    encoded_jwt = jwt.encode({'userId': res}, settings.JWT_SECRET, algorithm='HS256')
+    encoded_jwt = jwt.encode({"userId": res}, settings.JWT_SECRET, algorithm="HS256")
     return Response(200, {"jwt": encoded_jwt}, [[b"content-type", b"application/json"]])
 
 
@@ -20,5 +20,5 @@ def login(username, password):
     res = db.login(username, password)
     if res is False:
         return Response(400, "Invalid login or password")
-    encoded_jwt = jwt.encode({'userId': res}, settings.JWT_SECRET, algorithm='HS256')
+    encoded_jwt = jwt.encode({"userId": res}, settings.JWT_SECRET, algorithm="HS256")
     return Response(200, {"jwt": encoded_jwt}, [[b"content-type", b"application/json"]])
