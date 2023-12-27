@@ -40,5 +40,5 @@ jobs:
       - name: Build docker image
         run: docker-compose build
       - name: Run tests
-        run: docker-compose run --rm backend pytest --cov=renamer --cov-fail-under=95
+        run: docker-compose run --rm backend pytest --cov=src --cov-fail-under=95
 
